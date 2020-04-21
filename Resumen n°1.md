@@ -1,6 +1,6 @@
-#Resumen de Redes Neuronales 
+# Resumen de Redes Neuronales 
 
-1. Resnet
+## 1.-Resnet
 
 ### Arquitectura
 
@@ -16,7 +16,7 @@
 ### Desventajas
 
 
-2. Highway 
+## 2.- Highway 
 
 ### Arquitectura
 
@@ -32,7 +32,7 @@
 * Lento entranmiento y velocidad de convergencia
 * El rendimiento decrece cuando se añaden unidades ocultas bajo las 10 capas
 
-3. DenseNet
+## 3.- DenseNet
 
 ### Arquitectura
 
@@ -42,7 +42,7 @@
 ### Desventajas
 
 
-4.	 Xception
+## 4.- Xception
 
 ### Arquitectura
 
