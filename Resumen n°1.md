@@ -1,12 +1,14 @@
-# Resumen de Redes Neuronales 
-
+<p align="center" color="red">
+ <h1>Resumen de Redes Neuronales </h1>
+</p>
 ## 1.-Resnet
 
 ### Arquitectura
 
 * Posee dos puertas ( gate ) : transforma gate y la carry gate
-<center><img src="highway.png")><center>
-![Screenshot](highway.png) 
+<p align="center">
+<img src="highway.png">
+</p>
 ### Características
 
 * Introduco el concepto de aprendisaje residual
