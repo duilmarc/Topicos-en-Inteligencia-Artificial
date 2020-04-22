@@ -6,7 +6,7 @@
 
 * Posee dos puertas ( gate ) : transforma gate y la carry gate
 
-![Screenshot](multipath.png) 
+![Screenshot](highway.png) 
 ### Características
 
 * Introduco el concepto de aprendisaje residual
