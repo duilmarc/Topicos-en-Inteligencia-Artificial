@@ -1,4 +1,4 @@
-<p align="center" color="red">
+<p align="center">
  <h1>Resumen de Redes Neuronales </h1>
 </p>
 ## 1.-Resnet
