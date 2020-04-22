@@ -4,16 +4,24 @@
 
 ### Arquitectura
 
-* Introduce el concepto de aprendisaje residual.
-* Multi-Path 
+* Posee dos puertas ( gate ) : transforma gate y la carry gate
+
+![Screenshot](multipath.png) 
+### Características
+
+* Introduco el concepto de aprendisaje residual
+* Se categoriza como una Red Neuronal MultiPath
+
+
 
 ### Ventajas
 
 * Menos complejidad computacional que la VGG y AlexNet 
 * Buen desempeño en tarea de reconocimiento y localización de imágenes
-
+* Resuelve y previene parcialmente el problema del desvanecimiento de la gradiente
 
 ### Desventajas
+
 
 
 ## 2.- Highway 
@@ -29,7 +37,7 @@
 
 ### Desventajas
 
-* Lento entranmiento y velocidad de convergencia
+* Lento entrenamiento y velocidad de convergencia
 * El rendimiento decrece cuando se añaden unidades ocultas bajo las 10 capas
 
 ## 3.- DenseNet
@@ -53,6 +61,9 @@
 
 
 
+
 ## Terminos
 
-Cross-layer connectivity : Comunicación entre capas permitiendo que una capa acceda a la data de otra capa para intercambio de la información y una interacción disponible ( cross-layer network )
+*Cross-layer connectivity : Comunicación entre capas permitiendo que una capa acceda a la data de otra para intercambio de la información y una disponible interacción ( cross-layer network )
+* asfasfasf
+
