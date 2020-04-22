@@ -5,7 +5,7 @@
 ### Arquitectura
 
 * Posee dos puertas ( gate ) : transforma gate y la carry gate
-
+<center><img src="highway.png")><center>
 ![Screenshot](highway.png) 
 ### Características
 
