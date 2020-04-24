@@ -5,26 +5,39 @@
 ## 1.-Resnet
 
 <p align="center">
-<img src="resnet.png" alt="https://arxiv.org/pdf/1512.03385.pdf - Figure 2"> Residual Learning : a building block [2]
+<img src="resnet.png" alt="https://arxiv.org/pdf/1512.03385.pdf - Figure 2" > <br> Imagen1. 
+Residual Learning : a building block [2]
 </p>
 
 
 ### Arquitectura
 
-* Teniendo un H(x) que es   
-* Un camino realiza la función de identidad , con un padding de ceros para incrementar dimensiones. No hay parámetros extra.
-* El camino proyectado es usado para incrementar solamente la dimensión, los otros caminos son identidad. Parámetros extra son necesarios
-* Todos los caminos son proyecciones. Parámetros extra son mas que los del punto anterior.
+* Tiene un camino corto de identidad, que evita una o mas capas.
+* Formalmente, se denota el mapeo subyacente como:
+```
+H(x) , x : representa la entrada para la primera de estas capas.
+-> H(x) Este mapeo sera ajustado para algunas capas
+```
+* Define el ajuste del acoplamiento de las capas no lineaes a la función residual.
+```
+Funcion residual: 
 
+F(x) := H(x) - x ( Se asume que la entrada y salida son de las mismas dimensiones )
+``` 
+* El mapeo general es refundido a 
+```
+F(x) + x
+... Este no se aplica a todas las capas
+```
 
 ### Características
 
 - Introduce el concepto de aprendizaje residual ( skip connection )
 - 20 y 8 veces mas profunda que AlexNet y VCG respectivamente y posee menos complejidad computacional que estas dos
-- Emplea shortcout connections
-- Basada en la idea de Highway Network
-- Usa una información residual , la cual mejora la referencia que se usa para la optimización de los pesos
+- Emplea shortcouts connections, la cual aplica un mapeo de identidad.
+- Basada en la idea de Highway Network por usar capas alternas.
 - Los links residuales aceleran la convergencia las "deep networks"
+- Optimiza el mapeo residual en lugar de optimizar el mapeo original sin referencia.
 
 ### Ventajas
 
@@ -33,9 +46,6 @@
 - Las funciones residuales son fáciles de optimizar en comparación de la de Highway Network
 - Evita el problema de la disminución de "vanishing gradients" asi como tambien de "exploding gradients"
 
-### Desventajas
-
-* Cuando la red es muy profunda el tiempo de complejidad es alto, pero se suele solucionar con un cuello de botella
 
 ## 2.- Highway
 
@@ -43,7 +53,10 @@
 
 <p align="center">
 <img src="highway.png" alt="https://miro.medium.com/max/1120/1*qHf_AHv8yJJsKQok4KS4Jw.png">
+<br>
+Imagen 2 - Flujo de la información en una Highway [3]
 </p>
+
 
 #### Como funciona:
 
@@ -119,14 +132,16 @@ nada util. Para solucionar se aplica gradient clipping y weight regularization, 
 
 # Referencias :
 
-## Referencial general:
+## Generales:
 
 1. [A Survey of the Recent Architectures of Deep Convolutional Neural Networks](https://arxiv.org/pdf/1901.06032.pdf)
 
 
 ## Resnet
 2. [Deep Residual Learning for Image Recognition](https://arxiv.org/pdf/1512.03385.pdf)
-
+3. [An Overview of ResNet and its Variants](https://towardsdatascience.com/an-overview-of-resnet-and-its-variants-5281e2f56035)
 ## Highway
 3.  https://towardsdatascience.com/review-highway-networks-gating-function-to-highway-image-classification-5a33833797b5
 4. [Highway Networks](https://arxiv.org/pdf/1505.00387.pdf)
+
+## DenseNet
