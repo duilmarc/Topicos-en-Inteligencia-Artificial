@@ -191,7 +191,6 @@ Imagen 5 - Arquitectura de Xception[8]
 
 - *Cross-layer connectivity* : Comunicación entre capas permitiendo que una capa acceda a la data de otra para intercambio de la información y una disponible interacción ( cross-layer network )
 - *Multipaths*: Pueden sistematicamente conectar una capa con otra evitando alguna capa intermediaria capa para permitir el flujo especializado de información entre capas. Busca resolver el problema del desvanecimiento de la gradiente por hacer que esta misma sea accesible a capas inferiores.
-- *Shortcout connections*: afasf
 - *Problema de la explosión*: Largos numeros de errores en las gradientes se acumulan y resultan en amplias actualizaciones a los pesos del modelo de red neuronal durante su entrenamiento, causando una pobre predicción y un modelo que no aporta nada util. Para solucionar se aplica gradient clipping y weight regularization, así como otros.
 - *Vanishing Gradient*: al contrario del problema de la explosión en cada iteración del entrenamiento se multiplican pequeños números para calcular las gradientes lo cual hace que tiende a ser cero.    
 
