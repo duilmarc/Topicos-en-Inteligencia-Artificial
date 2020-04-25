@@ -18,7 +18,7 @@ Residual Learning : a building block [2]
 H(x) , x : representa la entrada para la primera de estas capas.
 -> H(x) Este mapeo sera ajustado para algunas capas
 ```
-* Define el ajuste del acoplamiento de las capas no lineaes a la función residual.
+* Define el ajuste del acoplamiento de las capas no lineales a la función residual.
 ```
 Funcion residual: 
 
@@ -27,8 +27,9 @@ F(x) := H(x) - x ( Se asume que la entrada y salida son de las mismas dimensione
 * El mapeo general es refundido a 
 ```
 F(x) + x
-... Este no se aplica a todas las capas
+... Este no se aplica necesariamete a todas las capas
 ```
+
 
 ### Características
 
@@ -91,8 +92,7 @@ C = 1 - T
 - Se categoriza como una Red Neuronal MultiPath
 - Inspirada por la LSTM
 - Posee un mecanismo de cross-layer connectivity.
-- Hace uso de la función de activación para transformar adaptativamente o evitar la señal para que la red pueda profundizarse
--Se agrega información de la L capa y la información de las capas previas l - j creando un efecto de regularización, haciendo de la gradiente basada en entrenamiento de la red profunda sin cambio.
+- Se agrega información de la capa L y la información de las capas previas l - j creando un efecto de regularización, haciendo que no cambie gradiente basada en entrenamiento de la red profunda.
 - Usa un padding de ceros para asegurarse que el bloque de estado y la puerta de transformación del mapa de características sea del mismo tamaño que la entrada.
 
 ### Ventajas
@@ -101,16 +101,48 @@ C = 1 - T
 - Enriquecen representación de caracteristicas e introduce a un nuevo mecanismo de conectividad entre capas
 - Permite el entrenamiento de mas de 100 capas , incluso con 900 capas usando el algoritmo de la gradiente descendente estocástica (SGD) 
 
+### Desventajas
 
-
+* Las variaciones recientes de ResNets muestran que muchas capas contribuyen muy poco y, de hecho, pueden descartarse al azar durante el entrenamiento
+* La función de identidad y la salida de H` se combinan por suma, lo que puede impedir el flujo de información en la red.
 
 ## 3.- DenseNet
+<p align="center">
+<img src="dense-net.jpg" alt="https://miro.medium.com/max/1120/1*qHf_AHv8yJJsKQok4KS4Jw.png">
+<br>
+Imagen 3 - Estructura DenseNet [6]
+</p>
 
 ### Arquitectura
 
-### Ventajas
+* Propone un patrón de conectividad diferente: introduce conexiones directas desde cualquier capa a todas las capas posteriores.
+* Consecuentemente: 
+```
+La capa L, recibe un mapa de caracteristicas de todas las capas predecesoras , x(0), x(1), x(2), ..., x(l-1), como entradas
+
+    x(l) = H(l)([x0,x1,...,x(l-1)])
+
+donde: [x0,x1,...,x(l-1)], se refiere a la concatenación del mapa de caracteristicas producidas en  las capas 0, 1, ... , l-1.
+```
 
 ### Características
+
+* Cada capa en la red neuronal DenseNet tiene l-conexiones una entre cada capa y sus siguientes capas.
+* La red neuronal DenseNet posee L(L+1)/2 conecciones directas.
+* Los mapas de características de todas las capas predecesoras son usadas como entradas.    
+* Las capas de DenseNet son muy estrechas, agregan solo un pequeño conjunto de mapas de características al "conocimiento colectivo" de la red y mantienen los mapas de características restantes sin cambios, y el clasificador final toma una decisión basado en todos los mapas de características en la red.
+* Todas las capas posteriores pueden acceder a los mapas de características aprendidos por cualquiera de las capas de DenseNet lo que fomenta la reutilización de caracteristicas en toda la red y conduce a modelos más compactos.
+* Nunca combina las características usando una suma, las combina usando una concatenación
+
+### Ventajas
+
+* Alivianizan el problema del desvanecimiento de la gradiente
+* Fomenta el reuso de caracteristicas
+* Sustancialmente reduce el número de parámetros
+* Posee un flujo mejorado de información y gradientes en toda la red, lo que los hace fáciles de entrenar.
+* Las conexiones en la DenseNet tienen un efecto de regularización, que reduce el sobreajuste en tareas con tamaños de conjuntos de entrenamiento más pequeños.
+
+
 
 ### Desventajas
 
@@ -124,11 +156,11 @@ C = 1 - T
 
 # Términos
 
-- Cross-layer connectivity : Comunicación entre capas permitiendo que una capa acceda a la data de otra para intercambio de la información y una disponible interacción ( cross-layer network )
-- Multipaths: Pueden sistematicamente conectar una capa con otra evitando alguna capa intermediaria capa para permitir el flujo especializado de información entre capas. Busca resolver el problema del desvanecimiento de la gradiente por hacer que esta misma sea accesible a capas inferiores.
-* Explosion Problem: largos numeros de errores en las gradientes se acumulan y resulta en amplias actualizaciones a los pesos del modelo de red neuronal durante su entrenamiento, causando una pobre predicción y un modelo que no aporta
-nada util. Para solucionar se aplica gradient clipping y weight regularization, como otros.
-* Vanishing Gradient: al contrario del problema de la explosión en cada iteración del entrenamiento se multiplican pequeños numeros para calcular las gradientes lo cual hace que empiece a ser cero.
+- *Cross-layer connectivity* : Comunicación entre capas permitiendo que una capa acceda a la data de otra para intercambio de la información y una disponible interacción ( cross-layer network )
+- *Multipaths*: Pueden sistematicamente conectar una capa con otra evitando alguna capa intermediaria capa para permitir el flujo especializado de información entre capas. Busca resolver el problema del desvanecimiento de la gradiente por hacer que esta misma sea accesible a capas inferiores.
+- *Shortcout connections*: afasf
+- *Problema de la explosión*: Largos numeros de errores en las gradientes se acumulan y resultan en amplias actualizaciones a los pesos del modelo de red neuronal durante su entrenamiento, causando una pobre predicción y un modelo que no aporta nada util. Para solucionar se aplica gradient clipping y weight regularization, así como otros.
+- *Vanishing Gradient*: al contrario del problema de la explosión en cada iteración del entrenamiento se multiplican pequeños números para calcular las gradientes lo cual hace que tiende a ser cero.    
 
 # Referencias :
 
@@ -141,7 +173,11 @@ nada util. Para solucionar se aplica gradient clipping y weight regularization, 
 2. [Deep Residual Learning for Image Recognition](https://arxiv.org/pdf/1512.03385.pdf)
 3. [An Overview of ResNet and its Variants](https://towardsdatascience.com/an-overview-of-resnet-and-its-variants-5281e2f56035)
 ## Highway
-3.  https://towardsdatascience.com/review-highway-networks-gating-function-to-highway-image-classification-5a33833797b5
+3. [Review: Highway Networks — Gating Function To Highway (Image Classification)](https://towardsdatascience.com/review-highway-networks-gating-function-to-highway-image-classification-5a33833797b5)
 4. [Highway Networks](https://arxiv.org/pdf/1505.00387.pdf)
 
 ## DenseNet
+
+5. [Densely Connected Convolutional Networks (DenseNets)](https://arxiv.org/pdf/1608.06993v3.pdf)
+6. [Github Densenet](https://arxiv.org/pdf/1608.06993v3.pdf)
+7. [Artículo: DenseNet](https://towardsdatascience.com/densenet-2810936aeebb)
